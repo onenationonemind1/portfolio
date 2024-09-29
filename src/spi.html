@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscilloscope Signal Comparison</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .comparison-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .comparison-container img {
+            width: 45%; /* Each image will take up 45% of the container */
+            height: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        pre[class*="language-"] {
+            padding: 1em;
+            margin: .5em 0;
+            overflow: auto;
+            border-radius: 0.3em;
+        }
+        code[class*="language-"] {
+            font-size: 14px;
+        }
+        div {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SPI using GPIO pin toggling</h1>
+
+    <div>6, 10, 24 bit 제어를 위한 각각의 SCK.</div>
+    
+    <!---->
+    <!-- Image comparison section -->
+    
+
+
+    <pre><code class="language-c">
+        //For 6bit
+        //uint32_t msk_6 = 1UL << 5; // 0b0000 0000 0000 0000 0000 0000 0010 0000
+        //For 10bit
+        //uint32_t msk_10 = 1UL << 9; // 0b0000 0000 0000 0000 0000 0010 0000 0000
+
+        uint32_t msk = 1UL << 23; // 0b0000 0000 1000 0000 0000 0000 0000 0000
+        *rb = 0b00000000101010100010010001001010; // 24bit SCK
+        do{
+          GPIOC->ODR &= ~GPIO_PIN_10; // deassert CLK
+          t_10ms_fg = 0;
+          while(t_10ms_fg == 0);
+          if(*rb & msk) {
+              GPIOC->ODR |= GPIO_PIN_12; //high
+          } else {
+              GPIOC->ODR &= ~GPIO_PIN_12;
+          }
+          GPIOC->ODR |= GPIO_PIN_10; // deassert CLK
+          t_10ms_fg = 0;
+          while(t_10ms_fg == 0);
+        
+        }while(msk>>=1);
+    </code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

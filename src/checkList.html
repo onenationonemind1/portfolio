@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명령어 체크리스트 모음</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>명령어 체크리스트 모음</h1>
+    <h2>사용자의 요구사항과 구현에 필요한 명령어를 체크리스트로 작성하였습니다.</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>명령어</th>
+                <th>요청 예시</th>
+                <th>Verbose ON 응답</th>
+                <th>Verbose OFF 응답</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Help</td>
+                <td>HELP&lt;CR&gt;</td>
+                <td>Command list</td>
+                <td>Command list</td>
+            </tr>
+            <tr>
+                <td>Who</td>
+                <td>WHO&lt;CR&gt;</td>
+                <td>ID=RADIO POWER TRANSMISSION (RPT)&lt;LF&gt;</td>
+                <td>ID=RADIO POWER TRANSMISSION (RPT)&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>Version</td>
+                <td>VERSION&lt;CR&gt;</td>
+                <td>VERSION=x.xx&lt;CR&gt;</td>
+                <td>VERSION=x.xx&lt;CR&gt;</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Verbose</td>
+                <td>VERBOSE ON &lt;CR&gt;</td>
+                <td>VERBOSE=ON&lt;CR&gt;</td>
+                <td>VERBOSE=ON&lt;CR&gt;</td>
+            </tr>
+            <tr>
+                <td>VERBOSE OFF&lt;CR&gt;</td>
+                <td>VERBOSE=OFF&lt;CR&gt;</td>
+                <td>VERBOSE=OFF&lt;CR&gt;</td>
+            </tr>
+            <tr>
+                <td>RARA</td>
+                <td>PARA&lt;CR&gt;</td>
+                <td>STA=4300123401012710001400380005</td>
+                <td>STA=4300123401012710001400380005</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>STATUS&lt;CR&gt;</td>
+                <td>OS0100249F00003800A511&lt;LF&gt;<br>OS0200249F00003800A511&lt;LF&gt;<br>.<br>.<br>OS1600249F00003800A511&lt;LF&gt;</td>
+                <td>OS0100249F00003800A511&lt;LF&gt;<br>OS0200249F00003800A511&lt;LF&gt;<br>.<br>.<br>OS1600249F00003800A511&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>LOCK</td>
+                <td>LOCK&lt;CR&gt;</td>
+                <td>OSC 01 = UNLOCK&lt;LF&gt;<br>OSC 02 = UNLOCK&lt;LF&gt;<br>.<br>.<br>OSC 16 = UNLOCK&lt;LF&gt;</td>
+                <td>OSC 01 = UNLOCK&lt;LF&gt;<br>OSC 02 = UNLOCK&lt;LF&gt;<br>.<br>.<br>OSC 16 = UNLOCK&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>PLD</td>
+                <td>PLD&lt;CR&gt;</td>
+                <td>PLD=1111111111111111&lt;LF&gt;<br>PLD=00000000000000&lt;LF&gt;<br>…<br>PLD=01001011010000&lt;LF&gt;<br>…<br>(반복)</td>
+                <td>PLD=1111111111111111&lt;LF&gt;<br>PLD=00000000000000&lt;LF&gt;<br>…<br>PLD=01001011010000&lt;LF&gt;<br>…<br>(반복)</td>
+            </tr>
+            <tr>
+                <td>CLEAR</td>
+                <td>CLEAR&lt;CR&gt;</td>
+                <td>PLD 상태 보고 반복 동작 정지</td>
+                <td>PLD 상태 보고 반복 동작 정지</td>
+            </tr>
+            <tr>
+                <td rowspan="3">FREQ</td>
+                <td>FREQ&lt;CR&gt;</td>
+                <td>OSC01 FREQUENCY=2400.000MHz&lt;LF&gt;<br>OSC02 FREQUENCY=2400.000MHz&lt;LF&gt;<br>.<br>.<br>OSC16 FREQUENCY=2400.000MHz&lt;LF&gt;</td>
+                <td>OSC01 FREQUENCY=2400.000MHz&lt;LF&gt;<br>OSC02 FREQUENCY=2400.000MHz&lt;LF&gt;<br>.<br>.<br>OSC16 FREQUENCY=2400.000MHz&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>FREQ 01 2400 &lt;CR&gt;</td>
+                <td>OSC01 FREQUENCY=2400.000MHz&lt;LF&gt;</td>
+                <td>OSC01 FREQUENCY=2400.000MHz&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>FREQ 16 2725.000&lt;CR&gt;</td>
+                <td>OSC01 FREQUENCY=2725.000MHz&lt;LF&gt;</td>
+                <td>OSC01 FREQUENCY=2725.000MHz&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">PHASE</td>
+                <td>PHASE&lt;CR&gt;</td>
+                <td>OSC01 PHASE=0.0degree&lt;LF&gt;<br>OSC02 PHASE=0.0degree&lt;LF&gt;<br>.<br>.<br>OSC16 PHASE=0.0degree&lt;LF&gt;</td>
+                <td>OSC01 PHASE=0.0degree&lt;LF&gt;<br>OSC02 PHASE=0.0degree&lt;LF&gt;<br>.<br>.<br>OSC16 PHASE=0.0degree&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>PHASE 01 1.4</td>
+                <td>OSC01 PHASE=1.4degree&lt;LF&gt;</td>
+                <td>OSC01 PHASE=1.4degree&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>PHASE 16 360</td>
+                <td>OSC16 PHASE=360degree&lt;LF&gt;</td>
+                <td>OSC16 PHASE=360degree&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">GAIN</td>
+                <td>GAIN&lt;CR&gt;</td>
+                <td>OSC01 GAIN=0.0dB&lt;LF&gt;<br>OSC02 GAIN=0.0dB&lt;LF&gt;<br>.<br>.<br>OSC16 GAIN=0.0dB&lt;LF&gt;</td>
+                <td>OSC01 GAIN=0.0dB&lt;LF&gt;<br>OSC02 GAIN=0.0dB&lt;LF&gt;<br>.<br>.<br>OSC16 GAIN=0.0dB&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>GAIN 01 10.5&lt;CR&gt;</td>
+                <td>OSC01 GAIN=10.5dB&lt;LF&gt;</td>
+                <td>OSC01 GAIN=10.5dB&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>GAIN 16 31.5&lt;CR&gt;</td>
+                <td>OSC16 GAIN=31.5dB&lt;LF&gt;</td>
+                <td>OSC16 GAIN=31.5dB&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td rowspan="2">UPDATE</td>
+                <td>UPDATE 01 ON</td>
+                <td>UPDATE OSC01 POWER = ON&lt;LF&gt;<br>OS010024F00003800A511&lt;LF&gt;</td>
+                <td>OS010024F00003800A511&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>UPDATE 16 OFF</td>
+                <td>UPDATE OSC16 POWER = OFF&lt;LF&gt;<br>OS160024F00003800A501</td>
+                <td>OS160024F00003800A501</td>
+            </tr>
+            <tr>
+                <td rowspan="3">POWER</td>
+                <td>POWER&lt;CR&gt;</td>
+                <td>OSC01 POWER = ON&lt;LF&gt;<br>OSC02 POWER = ON&lt;LF&gt;<br>.<br>.<br>OSC16 POWER = ON&lt;LF&gt;</td>
+                <td>OSC01 POWER = ON&lt;LF&gt;<br>OSC02 POWER = ON&lt;LF&gt;<br>.<br>.<br>OSC16 POWER = ON&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>POWER 01 ON</td>
+                <td>OSC01 POWER = ON&lt;LF&gt;<br>OS010024F00003800A511&lt;LF&gt;</td>
+                <td>OS010024F00003800A511&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>POWER 16 ON</td>
+                <td>OSC16 POWER = ON&lt;LF&gt;<br>OS160024F00003800A511&lt;LF&gt;</td>
+                <td>OS160024F00003800A511&lt;LF&gt;</td>
+            </tr>
+            <tr>
+                <td>EEPROM</td>
+                <td>EEPROM INIT&lt;CR&gt;</td>
+                <td>-&gt;EEPROM Initialized</td>
+                <td>-&gt;EEPROM Initialized</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

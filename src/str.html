@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C 언어 문자열 처리</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        
+        pre[class*="language-"] {
+            padding: 1em;
+            margin: .5em 0;
+            overflow: auto;
+            border-radius: 0.3em;
+        }
+        code[class*="language-"] {
+            font-size: 14px;
+        }
+        div{
+            font-size: 18px; /* div 태그 내 텍스트 크기를 18px로 증가 */
+            margin-bottom: 10px; /* 가독성을 위해 아래 여백 추가 */
+        }
+    </style>
+</head>
+<body>
+    <h1>문자열 처리 예제 코드 설명</h1>
+    <hr>
+    <h1>1. UART 수신 콜백 함수</h1>
+    
+<div>사용자 입력을 처리하는 UART 수신 콜백 함수입니다. 엔터키 입력 또는 버퍼 크기 10 이상 시 문자열 처리를 수행합니다. </div>
+<pre><code class="language-c">void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+    {
+        if(huart->Instance == UART4)
+        {
+            rx_data[rx_index++] = rx_buffer[0];
+            if(rx_index >= BUFFER_SIZE || rx_buffer[0] == 13) // 10 -> rx_data[] size is 10 , 13 -> "<CR>" or "\n"
+            {
+                rx_data[rx_index++] = '\0';
+                rx_buffer_fg = 1;
+                //HAL_UART_Transmit(&huart4, rx_data, rx_index, 12);
+                rx_index = 0;
+            }
+            HAL_UART_Receive_IT(&huart4, rx_buffer, 1); //Every time Need reset after MCU make UART Receive Interrupt.
+        }
+    }</code></pre>
+
+    <h1>2. 명령어 파싱</h1>
+    <div>sscanf 함수를 사용하여 입력된 명령어를 파싱합니다.</div>
+    <pre><code class="language-c">if(sscanf(rx_data, "%s %s %s", command, osc, control_Value) == 3); //Set 01 OSC to 2400 Frequency ex) FREQ 01 2400
+ if(sscanf(rx_data, "%s", command) == 1); //Display all Frequency ex) FREQ</code></pre>
+   
+ 
+ <h1>3. 명령어 처리</h1>
+ <div>switch-case 문을 사용하여 명령어를 처리합니다.</div>
+    <pre><code class="language-c">switch(command[0])
+        {
+                //Exmaple about FREQ command
+              case 'F':
+                if (memcmp(command, "FREQ", 4) == 0)
+                {
+                    start_freq_function();
+                    HAL_UART_Transmit(&huart4, "FREQ[OK]", 8, 100);
+                }
+        }</code></pre>
+
+
+        <h1>4. 소수점 처리 및 반올림</h1>
+    <div>16비트 MCU에서 소수점 입력 시 2번째 자리에서 반올림하는 로직입니다.</div>
+    <pre><code class="language-c">	/******Exist float? and rounding *****/
+        rounding = (cV_to_f_cp - (int)cV_to_f_cp) * 100;
+        r_secDgit = (int)rounding - ((int)rounding % 10);
+        r_fistDgit = (int)rounding - ((int)rounding / 10);
+        if (r_fistDgit > 5)
+        {
+            r_secDgit = r_secDgit + 10;
+            r_secDgit = r_secDgit / 10;
+        }	/******Exist float? and rounding *****/
+        rounding = (cV_to_f_cp - (int)cV_to_f_cp) * 100;
+        r_secDgit = (int)rounding - ((int)rounding % 10);
+        r_fistDgit = (int)rounding - ((int)rounding / 10);
+        if (r_fistDgit > 5)
+        {
+            r_secDgit = r_secDgit + 10;
+            r_secDgit = r_secDgit / 10;
+        }</code></pre>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

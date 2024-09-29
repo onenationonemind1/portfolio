@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combine HTML with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="section1"></div>
+    <div id="section2"></div>
+    <div id="section3"></div>
+
+    <script>
+        // jQuery의 load() 메서드를 이용해 HTML 파일을 로드
+        $('#section1').load('spi.html');
+        $('#section2').load('eeprom.html');
+        $('#section3').load('str.html');
+    </script>
+</body>
+</html>

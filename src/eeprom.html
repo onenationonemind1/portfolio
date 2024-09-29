@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C 언어 문자열 처리</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        
+        pre[class*="language-"] {
+            padding: 1em;
+            margin: .5em 0;
+            overflow: auto;
+            border-radius: 0.3em;
+        }
+        code[class*="language-"] {
+            font-size: 14px;
+        }
+        div{
+            font-size: 18px; /* div 태그 내 텍스트 크기를 18px로 증가 */
+            margin-bottom: 10px; /* 가독성을 위해 아래 여백 추가 */
+        }
+    </style>
+</head>
+<body>
+    <h1>eeprom 처리 예제 코드</h1>
+    
+    <div>다음 명령어를 사용하여, eeprom에 데이터를 저장합니다. 이후 eeprom에 데이터가 제대로 저장됐는지 값을 불러와 확인합니다.</div>
+    <pre><code class="language-c">/******** Write and Read ********/
+HAL_I2C_Mem_Write(&hi2c1, 0xA0, 0x40, I2C_MEMADD_SIZE_8BIT, osc_to_a, 2, 100);
+HAL_Delay(5);
+HAL_I2C_Mem_Read(&hi2c1, 0xA0, 0x40, I2C_MEMADD_SIZE_8BIT, arr_osc, 2, 100);
+HAL_Delay(5);
+
+HAL_I2C_Mem_Write(&hi2c1, 0xA0, 0x30, I2C_MEMADD_SIZE_8BIT, f_to_a_cp, 5, 100);
+HAL_Delay(5);
+HAL_I2C_Mem_Read(&hi2c1, 0xA0, 0x30, I2C_MEMADD_SIZE_8BIT, arr_cV_f_cp, 5, 100);
+HAL_Delay(5);
+
+if(memcmp(osc_2, arr_osc, 2) == 0)
+{
+    HAL_UART_Transmit(&huart4, "cplt osc", 8, 100);
+}
+else
+{
+    HAL_UART_Transmit(&huart4, "fail osc", 8, 100);
+}
+
+if(memcmp(f_to_a_cp, arr_cV_f_cp, 5) == 0)
+{
+    HAL_UART_Transmit(&huart4, "cplt f", 6, 100);
+}
+else
+{
+    HAL_UART_Transmit(&huart4, "fail f", 6, 100);
+}
+    </code></pre>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

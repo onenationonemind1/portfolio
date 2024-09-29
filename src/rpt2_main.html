@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 전자공학 포트폴리오</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background: linear-gradient(135deg, #0066cc, #00aaff);
+            position: relative;
+        }
+        .header svg {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin-top: 2rem;
+        }
+        .content {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+
+        /* 디자인 : 카드 스타일 */
+        .card-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+        .card-nav a {
+            width: 30%;
+            padding: 20px;
+            background-color: white;
+            color: #0066cc;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            cursor: pointer;
+        }
+        .card-nav a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .card-nav h3 {
+            margin-top: 0;
+        }
+        .card-nav p {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+            <defs>
+                <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#0066cc;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#00aaff;stop-opacity:1" />
+                </linearGradient>
+                
+                <!-- 전력 파동 애니메이션 -->
+                <path id="powerWave" d="M0,0 Q30,-40 60,0 T120,0" fill="none" stroke="#FFA500" stroke-width="3">
+                    <animateTransform
+                        attributeName="transform"
+                        type="translate"
+                        from="0 0"
+                        to="120 0"
+                        dur="2s"
+                        repeatCount="indefinite" />
+                </path>
+            </defs>
+            
+            <!-- 배경 -->
+            <rect width="800" height="400" fill="url(#bg-gradient)"/>
+            
+            <!-- 회로 패턴 -->
+            <g stroke="#ffffff" stroke-width="1" opacity="0.1">
+                <path d="M0 80 L800 80 M0 160 L800 160 M0 240 L800 240 M0 320 L800 320" />
+                <path d="M80 0 L80 400 M240 0 L240 400 M400 0 L400 400 M560 0 L560 400 M720 0 L720 400" />
+            </g>
+            
+            <!-- KETI 로고 -->
+            <g transform="translate(50, 50)">
+                <text x="0" y="60" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="#ffffff">KETI</text>
+                <circle cx="240" cy="30" r="8" fill="#ffffff"/>
+                <circle cx="240" cy="60" r="8" fill="#ffffff"/>
+                <circle cx="240" cy="90" r="8" fill="#ffffff"/>
+            </g>
+            
+            <!-- 한글 및 영문 명칭 -->
+            <text x="50" y="150" font-family="Arial, sans-serif" font-size="24" fill="#ffffff">한국전자기술연구원</text>
+            <text x="50" y="190" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Korea Electronics Technology Institute</text>
+            
+            <!-- 무선전력송신 시스템 문구 -->
+            <text x="400" y="300" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFA500" text-anchor="middle">무선전력송신 시스템</text>
+            
+            <!-- 포트폴리오 제목 -->
+            <text x="400" y="350" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#ffffff" text-anchor="middle">RF Power Transmission System</text>
+            
+            <!-- 무선전력송신 시스템 동적 도식 -->
+            <g transform="translate(500, 50)">
+                <!-- 송신 장치 -->
+                <rect x="10" y="70" width="80" height="140" rx="10" ry="10" fill="#0066cc" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="50" cy="120" r="30" fill="none" stroke="#FFA500" stroke-width="4"/>
+                <circle cx="50" cy="120" r="20" fill="none" stroke="#FFA500" stroke-width="4"/>
+                
+                <!-- 전력 전송 애니메이션 -->
+                <g>
+                    <use href="#powerWave" y="120"/>
+                    <use href="#powerWave" y="140"/>
+                    <use href="#powerWave" y="100"/>
+                </g>
+                
+                <!-- 수신 장치 -->
+                <rect x="210" y="70" width="80" height="140" rx="10" ry="10" fill="#0066cc" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="250" cy="120" r="30" fill="none" stroke="#ffffff" stroke-width="4"/>
+                <circle cx="250" cy="120" r="20" fill="none" stroke="#ffffff" stroke-width="4"/>
+                
+                <!-- 배터리 충전 표시 -->
+                <rect x="230" y="170" width="40" height="20" fill="#4CAF50" stroke="#ffffff" stroke-width="2">
+                    <animate attributeName="width" values="0;40" dur="4s" repeatCount="indefinite" />
+                </rect>
+            </g>
+        </svg>
+        <h3>스크롤을 아래로 내리세요!</h3>
+        <h1></h1>
+        <div class="scroll-indicator">↓</div>
+    </header>
+    <main class="content">
+        <h2>목차</h2>
+        <ul>
+            <li><a href="#section1">프로젝트 개요</a></li>
+            <li><a href="#section2">개발 환경</a></li>
+            <li><a href="#section3">이 프로젝트에서 기여한 부분</a></li>
+        </ul>
+        <hr>
+    </main>
+    <main class="content">
+        <section id="section1">
+            <h2>프로젝트 개요</h2>
+            <p>KETI(한국전자기술연구원)에서 수행한 무선전력송신 시스템의 프로젝트입니다. 사용자 요구대로 케이블이나 전선 없이 기기를 충전하는 목표를 달성하였습니다.</p>
+            <ul>
+                <li>개발 기간 : 5주(약 1달)</li>
+                <li>개발 인원 : 2명</li>
+                <li>프로젝트 업무
+                    <ul>
+                    <li>고객 사양에 따른 펌웨어 및 초기/최종 제품 테스트</li>
+                <li>원인 분석 및 디버깅</li>
+                <li>회로도, 조립 도면, 테스트 문서 해석</li>
+                <li>하드웨어 초정밀 납땜 및 케이블 제작</li>
+            </ul>
+                </li>
+            </ul>
+         </section>
+            <br><br><br>
+            <section id="section2">
+            <h2>개발 환경</h2>
+        <ul>
+            <li>AMR: STM32F4 Series, Cortex M4 32bit</li>
+            <li>IDE: STM32CUBE IDE</li>
+            <li>유지 및 보수: git</li>
+            <li>Language: C, Python</li>
+        </ul>
+          </section>
+        <br><br><br>
+        <section id="section3">
+        <h2>이 프로젝트에서 기여한 부분</h2>
+        <ul>
+            <li>SPI/I2C/UART 통신을 활용하여 하드웨어 제어</li>
+            <li>GPIO를 활용하여, 최대 속도 2ms의 SPI 드라이브 구현</li>
+            <li>기재된 15개의 명령어를 모두 성공적으로 구현</li>
+            <li>고객이 제시한 사양서 중 구현시 발생하는 오류 발견 및 테스트 케이스 및 체크리스트 작성</li>
+        </ul>
+        <br><br>
+        <div>아래 카드를 클릭하여 제가 기여한 결과의 일부를 확인하실수 있습니다.</div>
+        <!-- 카드 스타일 네비게이션 (팝업 창으로 열기) -->
+        <div class="card-nav">
+            <a href="javascript:void(0);" onclick="openPopup('./spi.html', 'SPI 통신 코드')">
+                <h3>SPI 통신</h3>
+                <p>I/O로 구현 (Bitbanging)</p>
+            </a>
+            <a href="javascript:void(0);" onclick="openPopup('./str.html', 'RS-232 통신 코드')">
+                <h3>RS-232 통신</h3>
+                <p>UART 통신에서 사용자 명령어에 따른 기기 작동</p>
+            </a>
+            <a href="javascript:void(0);" onclick="openPopup('./eeprom.html', 'I2C 통신 코드')">
+                <h3>I2C 통신</h3>
+                <p>EEPROM에 사용자 설정 값 저장</p>
+            </a>
+            <a href="javascript:void(0);" onclick="openPopup('./checkList.html', 'CheckList')">
+                <h3>체크 리스트</h3>
+                <p>csv 파일</p>
+            </a>
+        </div>
+    </section>
+    </main>
+
+    <script>
+        function openPopup(url, title) {
+            var width = 800;
+            var height = 600;
+            var left = (screen.width / 2) - (width / 2);
+            var top = (screen.height / 2) - (height / 2);
+            
+            window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+        }
+    </script>
+</body>
+</html>
